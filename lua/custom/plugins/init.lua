@@ -2,4 +2,28 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+
+local nvim_lsp = require 'nvim-lspconfig'
+return {
+  nvim_lsp.nixd.setup {
+    cmd = { 'nixd' },
+    settings = {
+      nixd = {
+        nixpkgs = {
+          expr = 'import <nixpkgs> { }',
+        },
+        formatting = {
+          command = { 'nixfmt' },
+        },
+        options = {
+          nixos = {
+            expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.k-on.options',
+          },
+          home_manager = {
+            expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."ruixi@k-on".options',
+          },
+        },
+      },
+    },
+  },
+}
