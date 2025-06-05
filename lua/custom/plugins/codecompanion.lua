@@ -4,15 +4,6 @@ return {
     opts = {
       log_level = 'DEBUG', -- or "TRACE"
     },
-    adapters = {
-      gemini = function()
-        return require('codecompanion.adapters').extend('gemini', {
-          env = {
-            api_key = 'AIzaSyAw4rO9IMWKrGSVH2FKOMG5l0LB9nVG04c',
-          },
-        })
-      end,
-    },
     strategies = {
       chat = {
         adapter = 'gemini',
